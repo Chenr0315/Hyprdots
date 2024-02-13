@@ -1,0 +1,110 @@
+{
+  "layer": "top",
+  "position": "top",
+  "modules-left": [
+    "custom/powermenu",
+    "hyprland/workspaces",
+    "memory",
+    "cpu"
+  ],
+  "modules-center": [
+    "clock"
+  ],
+  "modules-right": [
+    "pulseaudio",
+    "backlight",
+    "network",
+    "battery",
+    "tray"
+  ],
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "on-click": "activate",
+    "on-scroll-up": "hyprctl dispatch workspace e+1",
+    "on-scroll-down": "hyprctl dispatch workspace e-1"
+  },
+  "backlight": {
+    "device": "amd_backlight",
+    "on-scroll-up": "light -A 5",
+    "on-scroll-down": "light -U 5",
+    "format": "{icon} {percent}%",
+    "format-icons": [
+      "󰃝",
+      "󰃞",
+      "󰃟",
+      "󰃠"
+    ],
+    "tooltip": false
+  },
+  "pulseaudio": {
+    "scroll-step": 1,
+    "format": "{icon} {volume}%",
+    "format-muted": "󰖁 Muted",
+    "format-icons": {
+      "default": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "on-click": "amixer -q -D pulse sset Master toggle",
+    "tooltip": false
+  },
+  "battery": {
+    "interval": 10,
+    "states": {
+      "warning": 20,
+      "critical": 10
+    },
+    "format": "{icon} {capacity}%",
+    "format-icons": [
+      "󰁺",
+      "󰁻",
+      "󰁼",
+      "󰁽",
+      "󰁾",
+      "󰁿",
+      "󰂀",
+      "󰂁",
+      "󰂂",
+      "󰁹"
+    ],
+    "format-full": "{icon} {capacity}%",
+    "format-charging": "󰂄 {capacity}%",
+    "tooltip": false
+  },
+  "clock": {
+    "interval": 1,
+    "format": "<b>{:%Y年%m月%d日 %H:%M:%S %A}</b>",
+    "tooltip": true,
+    "tooltip-format": "<big>{:%Y年%b%d日}</big>\n<tt><small>{calendar}</small></tt>"
+  },
+  "memory": {
+    "interval": 1,
+    "format": " {percentage}%",
+    "states": {
+      "warning": 85
+    }
+  },
+  "cpu": {
+    "interval": 1,
+    "format": " {usage}%"
+  },
+  "network": {
+    "format-disconnected": "󰯡 Disconnected",
+    "format-ethernet": "󰀂 {ifname} ({ipaddr})",
+    "format-linked": "󰖪 {essid} (No IP)",
+    "format-wifi": "󰖩 {essid}",
+    "interval": 1,
+    "tooltip": false
+  },
+  "custom/powermenu": {
+    "format": "",
+    "on-click": "wlogout",
+    "tooltip": false
+  },
+  "tray": {
+    "icon-size": 15,
+    "spacing": 5
+  }
+}

@@ -1,0 +1,482 @@
+{
+#Export From SteamCommunity302
+admin off
+auto_https disable_redirects
+}
+(PNA_CORS) {
+    @options {
+    method OPTIONS
+    }
+    respond @options 204
+    header {
+    Access-Control-Allow-Origin {http.request.header.Origin}
+    Access-Control-Allow-Credentials true
+    Access-Control-Allow-Methods *
+    Access-Control-Allow-Headers *
+    Access-Control-Allow-Private-Network true
+    Access-Control-Request-Private-Network true
+    defer
+    }
+}
+
+https://steamcommunity.com:443 https://www.steamcommunity.com:443 {
+    tls /home/Chenr/.config/steamcommunity/steamcommunity.crt /home/Chenr/.config/steamcommunity/steamcommunity.key
+    reverse_proxy https://steamuserimages-a.akamaihd.net.edgesuite.net https://steamstore-a.akamaihd.net.edgesuite.net https://eaassets-a.akamaihd.net.edgesuite.net https://steamcommunity-a.akamaihd.net.edgesuite.net {
+    dynamic a steamuserimages-a.akamaihd.net.edgesuite.net 443
+    dynamic a steamstore-a.akamaihd.net.edgesuite.net 443
+    dynamic a eaassets-a.akamaihd.net.edgesuite.net 443
+    dynamic a steamcommunity-a.akamaihd.net.edgesuite.net 443
+    header_up Host steamcommunity.com
+    lb_try_duration 5s
+    lb_policy random_choose 4
+		transport http {
+			tls
+			tls_server_name img-s-msn-com.akamaized.net
+			#tls_insecure_skip_verify
+		}
+    }
+}
+
+https://store.steampowered.com:443 https://api.steampowered.com:443 https://help.steampowered.com:443 https://login.steampowered.com:443 https://checkout.steampowered.com:443 https://store.akamai.steamstatic.com:443 {
+#tls self_signed
+tls /home/Chenr/.config/steamcommunity/steamcommunity.crt /home/Chenr/.config/steamcommunity/steamcommunity.key
+    import PNA_CORS
+    # default/catchall
+    reverse_proxy https://steamuserimages-a.akamaihd.net.edgesuite.net https://steamstore-a.akamaihd.net.edgesuite.net https://eaassets-a.akamaihd.net.edgesuite.net https://steamcommunity-a.akamaihd.net.edgesuite.net {
+    dynamic a steamuserimages-a.akamaihd.net.edgesuite.net 443
+    dynamic a steamstore-a.akamaihd.net.edgesuite.net 443
+    dynamic a eaassets-a.akamaihd.net.edgesuite.net 443
+    dynamic a steamcommunity-a.akamaihd.net.edgesuite.net 443
+    lb_try_duration 5s
+    lb_policy random_choose 4
+    header_up Host {host}
+    transport http {
+    tls
+    tls_server_name img-s-msn-com.akamaized.net
+    #tls_insecure_skip_verify
+    }
+    }
+}
+
+https://discordapp.com:443 {
+	tls /home/Chenr/.config/steamcommunity/steamcommunity.crt /home/Chenr/.config/steamcommunity/steamcommunity.key
+	reverse_proxy https://162.159.129.233 https://162.159.135.233 https://162.159.130.233 https://162.159.133.233 https://162.159.134.233 {
+		header_up host discordapp.com
+		lb_policy first
+		lb_try_duration 5s
+		lb_retries 2
+		health_uri /cdn-cgi/trace
+		health_interval 60s
+		health_timeout 10s
+		health_status 4xx
+		transport http {
+			tls
+			tls_insecure_skip_verify
+		}
+	}
+}
+
+
+
+https://discord.com:443 {
+	tls /home/Chenr/.config/steamcommunity/steamcommunity.crt /home/Chenr/.config/steamcommunity/steamcommunity.key
+	@discordassets {
+	path /assets/*
+	}
+	reverse_proxy @discordassets https://dldsn.steam302.xyz {
+		header_up Host dldsn.steam302.xyz
+		header_up -Cookie
+		header_down -Cookie
+		transport http {
+			tls
+			#tls_insecure_skip_verify
+		}
+	}
+
+	reverse_proxy https://162.159.138.232 https://162.159.135.232 https://162.159.137.232 https://162.159.128.233 https://162.159.136.232 {
+		header_up Host discord.com
+		lb_policy first
+		lb_try_duration 5s
+		lb_retries 2
+		health_uri /cdn-cgi/trace
+		health_interval 60s
+		health_timeout 10s
+		health_status 4xx
+		transport http {
+			tls
+			tls_insecure_skip_verify
+		}
+	}
+}
+
+https://updates.discord.com:443 {
+	tls /home/Chenr/.config/steamcommunity/steamcommunity.crt /home/Chenr/.config/steamcommunity/steamcommunity.key
+	import PNA_CORS
+	reverse_proxy https://162.159.138.232 https://162.159.135.232 https://162.159.137.232 https://162.159.128.233 https://162.159.136.232 {
+		header_up Host updates.discord.com
+		lb_policy first
+		lb_try_duration 5s
+		lb_retries 2
+		health_uri /cdn-cgi/trace
+		health_interval 60s
+		health_timeout 10s
+		health_status 4xx
+		transport http {
+			tls
+			tls_insecure_skip_verify
+		}
+	}
+}
+
+https://dl.discordapp.net:443 {
+	tls /home/Chenr/.config/steamcommunity/steamcommunity.crt /home/Chenr/.config/steamcommunity/steamcommunity.key
+	reverse_proxy https://dlds.steam302.xyz {
+		header_up Host dlds.steam302.xyz
+		header_up -Cookie
+		header_down -Cookie
+		transport http {
+			tls
+			#tls_insecure_skip_verify
+		}
+	}
+}
+
+#https://blog.discord.com:443 {
+#tls /home/Chenr/.config/steamcommunity/steamcommunity.crt /home/Chenr/.config/steamcommunity/steamcommunity.key
+#    reverse_proxy https://blgds.steam302.xyz {
+#    transparent
+#    header_up Host blgds.steam302.xyz
+#    insecure_skip_verify
+#    }
+#}
+
+#https://medium.com:443 {
+#tls /home/Chenr/.config/steamcommunity/steamcommunity.crt /home/Chenr/.config/steamcommunity/steamcommunity.key
+#    reverse_proxy https://memds.steam302.xyz {
+#    transparent
+#    header_up Host memds.steam302.xyz
+#    insecure_skip_verify
+#    }
+#}
+
+https://gateway.discord.gg:443 https://discord.gg:443 {
+tls /home/Chenr/.config/steamcommunity/steamcommunity.crt /home/Chenr/.config/steamcommunity/steamcommunity.key
+    reverse_proxy https://162.159.136.234 https://162.159.134.234 https://162.159.135.234 https://162.159.133.234 https://162.159.130.234 {
+		header_up Host {host}
+		lb_policy first
+		lb_try_duration 5s
+		lb_retries 2
+		health_uri /cdn-cgi/trace
+		health_interval 60s
+		health_timeout 10s
+		health_status 4xx
+		transport http {
+			tls
+			tls_insecure_skip_verify
+		}
+	}
+}
+
+https://media.discordapp.net:443 {
+	tls /home/Chenr/.config/steamcommunity/steamcommunity.crt /home/Chenr/.config/steamcommunity/steamcommunity.key
+	import PNA_CORS
+	reverse_proxy https://162.159.133.232 https://162.159.134.232 https://162.159.129.232 https://162.159.130.232 https://162.159.128.232 {
+		header_up Host {host}
+		lb_policy first
+		lb_try_duration 5s
+		lb_retries 2
+		health_uri /cdn-cgi/trace
+		health_interval 60s
+		health_timeout 10s
+		health_status 4xx
+		transport http {
+			tls
+			tls_insecure_skip_verify
+		}
+	}
+}
+
+https://images-ext-2.discordapp.net:443 {
+	tls /home/Chenr/.config/steamcommunity/steamcommunity.crt /home/Chenr/.config/steamcommunity/steamcommunity.key
+	import PNA_CORS
+	redir https://media.discordapp.net{uri}
+}
+
+https://images-ext-1.discordapp.net:443 {
+	tls /home/Chenr/.config/steamcommunity/steamcommunity.crt /home/Chenr/.config/steamcommunity/steamcommunity.key
+	import PNA_CORS
+	redir https://media.discordapp.net{uri}
+}
+
+#https://discordcdn.com:443 {
+#tls /home/Chenr/.config/steamcommunity/steamcommunity.crt /home/Chenr/.config/steamcommunity/steamcommunity.key
+#    reverse_proxy https://162.159.138.233 https://162.159.128.234 https://162.159.137.233 https://162.159.129.234 https://162.159.136.233 {
+#    transparent
+#    header_up Host {host}
+#    #insecure_skip_verify
+#    }
+#}
+
+#https://support.discordapp.com:443 https://support.discord.com:443 https://safety.discord.com:443 https://support-dev.discord.com:443 {
+#tls /home/Chenr/.config/steamcommunity/steamcommunity.crt /home/Chenr/.config/steamcommunity/steamcommunity.key
+#    reverse_proxy https://104.16.53.111 https://104.16.51.111 {
+#    transparent
+#    header_up Host {host}
+#    insecure_skip_verify
+#    }
+#}
+
+https://support.discord.com:443 {
+	tls /home/Chenr/.config/steamcommunity/steamcommunity.crt /home/Chenr/.config/steamcommunity/steamcommunity.key
+	reverse_proxy https://supportds.steam302.xyz {
+		header_up Host supportds.steam302.xyz
+		transport http {
+			tls
+			#tls_insecure_skip_verify
+		}
+	}
+}
+
+https://safety.discord.com:443 {
+	tls /home/Chenr/.config/steamcommunity/steamcommunity.crt /home/Chenr/.config/steamcommunity/steamcommunity.key
+	reverse_proxy https://safetyds.steam302.xyz {
+		header_up Host supportds.steam302.xyz
+		transport http {
+			tls
+			#tls_insecure_skip_verify
+		}
+	}
+}
+
+https://support-dev.discord.com:443 {
+	tls /home/Chenr/.config/steamcommunity/steamcommunity.crt /home/Chenr/.config/steamcommunity/steamcommunity.key
+	reverse_proxy https://support-devds.steam302.xyz {
+		header_up Host support-devds.steam302.xyz
+		transport http {
+			tls
+			#tls_insecure_skip_verify
+		}
+	}
+}
+
+https://status.discord.com:443 https://streamkit.discord.com:443 https://feedback.discord.com:443 https://click.discord.com:443 https://pax.discord.com:443 https://printer.discord.com:443 https://ptb.discord.com:443 https://canary.discord.com:443 https://bugs.discord.com:443 https://i18n.discord.com:443 {
+	tls /home/Chenr/.config/steamcommunity/steamcommunity.crt /home/Chenr/.config/steamcommunity/steamcommunity.key
+	import PNA_CORS
+	reverse_proxy https://162.159.135.232 https://162.159.136.232 https://162.159.137.232 https://162.159.138.232 https://162.159.128.233 {
+		header_up Host {host}
+		lb_policy first
+		lb_try_duration 5s
+		lb_retries 2
+		health_uri /cdn-cgi/trace
+		health_interval 60s
+		health_timeout 10s
+		health_status 4xx
+		transport http {
+			tls
+			tls_insecure_skip_verify
+		}
+	}
+}
+
+https://url9177.discordapp.com:443 https://canary-api.discordapp.com:443 https://cdn-ptb.discordapp.com:443 https://ptb.discordapp.com:443 https://status.discordapp.com:443 https://cdn-canary.discordapp.com:443 https://cdn.discordapp.com:443 https://streamkit.discordapp.com:443 https://i18n.discordapp.com:443 https://url9624.discordapp.com:443 https://url7195.discordapp.com:443 https://merch.discordapp.com:443 https://printer.discordapp.com:443 https://canary.discordapp.com:443 https://apps.discordapp.com:443 https://pax.discordapp.com:443 {
+	tls /home/Chenr/.config/steamcommunity/steamcommunity.crt /home/Chenr/.config/steamcommunity/steamcommunity.key
+	import PNA_CORS
+	reverse_proxy https://162.159.133.233 https://162.159.129.233 https://162.159.130.233 https://162.159.134.233 https://162.159.135.233 {
+		header_up Host {host}
+		lb_policy first
+		lb_try_duration 5s
+		lb_retries 2
+		health_uri /cdn-cgi/trace
+		health_interval 60s
+		health_timeout 10s
+		health_status 4xx
+		transport http {
+			tls
+			tls_insecure_skip_verify
+		}
+	}
+}
+
+https://discord-attachments-uploads-prd.storage.googleapis.com:443 {
+tls /home/Chenr/.config/steamcommunity/steamcommunity.crt /home/Chenr/.config/steamcommunity/steamcommunity.key
+    import PNA_CORS
+    reverse_proxy https://storage.googleapis.com https://216.58.200.240 https://172.217.160.80 https://172.217.160.112 https://172.217.25.208 https://34.64.4.16 {
+	lb_policy first
+	lb_try_duration 5s
+	lb_retries 2
+	health_uri /cdn-cgi/trace
+	health_interval 60s
+	health_timeout 10s
+	health_status 4xx
+    header_up Host {host}
+    transport http {
+    tls
+    tls_server_name "uploads"
+    tls_insecure_skip_verify
+    }
+    }
+}
+
+https://steam-chat.com:443 {
+tls /home/Chenr/.config/steamcommunity/steamcommunity.crt /home/Chenr/.config/steamcommunity/steamcommunity.key
+    import PNA_CORS
+    header Access-Control-Allow-Origin *
+    reverse_proxy https://steamuserimages-a.akamaihd.net.edgesuite.net https://steamstore-a.akamaihd.net.edgesuite.net https://eaassets-a.akamaihd.net.edgesuite.net https://steamcommunity-a.akamaihd.net.edgesuite.net {
+    dynamic a steamuserimages-a.akamaihd.net.edgesuite.net 443
+    dynamic a steamstore-a.akamaihd.net.edgesuite.net 443
+    dynamic a eaassets-a.akamaihd.net.edgesuite.net 443
+    dynamic a steamcommunity-a.akamaihd.net.edgesuite.net 443
+    lb_try_duration 5s
+    lb_policy random_choose 4
+    transport http {
+    tls_server_name img-s-msn-com.akamaized.net
+    tls
+    }
+    header_up Host {host}
+    }
+}
+
+https://gist.github.com:443 {
+tls /home/Chenr/.config/steamcommunity/steamcommunity.crt /home/Chenr/.config/steamcommunity/steamcommunity.key
+
+    reverse_proxy https://ghgist.steam302.xyz {
+    lb_policy random
+    transport http {
+    tls
+    tls_insecure_skip_verify
+    }
+    header_up Host {host}
+    }
+}
+
+https://api.github.com:443 {
+tls /home/Chenr/.config/steamcommunity/steamcommunity.crt /home/Chenr/.config/steamcommunity/steamcommunity.key
+
+    reverse_proxy https://ghapi.steam302.xyz {
+    lb_policy random
+    transport http {
+    tls
+    tls_insecure_skip_verify
+    }
+    header_up Host {host}
+    }
+}
+
+https://github.com:443 https://www.github.com:443 {
+tls /home/Chenr/.config/steamcommunity/steamcommunity.crt /home/Chenr/.config/steamcommunity/steamcommunity.key
+
+    reverse_proxy https://gh.steam302.xyz {
+    lb_policy random
+    transport http {
+    tls
+    tls_insecure_skip_verify
+    }
+    header_up Host {host}
+    }
+}
+
+https://raw.githubusercontent.com:443 https://raw.github.com:443 https://camo.githubusercontent.com:443 https://cloud.githubusercontent.com:443 https://avatars.githubusercontent.com:443 https://avatars0.githubusercontent.com:443 https://avatars1.githubusercontent.com:443 https://avatars2.githubusercontent.com:443 https://avatars3.githubusercontent.com:443 https://user-images.githubusercontent.com:443 https://private-user-images.githubusercontent.com:443 https://github-releases.githubusercontent.com:443 {
+tls /home/Chenr/.config/steamcommunity/steamcommunity.crt /home/Chenr/.config/steamcommunity/steamcommunity.key
+    import PNA_CORS
+    reverse_proxy https://ghraw.steam302.xyz {
+    lb_policy random
+    transport http {
+    tls
+    tls_insecure_skip_verify
+    }
+    header_up Host {host}
+    }
+}
+
+https://assets-cdn.github.com:443 {
+tls /home/Chenr/.config/steamcommunity/steamcommunity.crt /home/Chenr/.config/steamcommunity/steamcommunity.key
+    import PNA_CORS
+    reverse_proxy https://ghassets.steam302.xyz {
+    lb_policy random
+    transport http {
+    tls
+    tls_insecure_skip_verify
+    }
+    header_up Host {host}
+    }
+}
+
+https://github.githubassets.com:443 https://help.github.com:443 https://docs.github.com:443 {
+tls /home/Chenr/.config/steamcommunity/steamcommunity.crt /home/Chenr/.config/steamcommunity/steamcommunity.key
+    import PNA_CORS
+    reverse_proxy https://gh154.steam302.xyz {
+    lb_policy random
+    transport http {
+    tls
+    tls_insecure_skip_verify
+    }
+    header_up Host {host}
+    }
+}
+
+https://codeload.github.com:443 {
+tls /home/Chenr/.config/steamcommunity/steamcommunity.crt /home/Chenr/.config/steamcommunity/steamcommunity.key
+    import PNA_CORS
+    reverse_proxy https://ghcload.steam302.xyz {
+    lb_policy random
+    transport http {
+    tls
+    tls_insecure_skip_verify
+    }
+    header_up Host {host}
+    }
+}
+
+
+https://*.github.io:443 https://www.github.io:443 https://github.io:443 {
+tls /home/Chenr/.config/steamcommunity/steamcommunity.crt /home/Chenr/.config/steamcommunity/steamcommunity.key
+
+    reverse_proxy https://ghio.steam302.xyz {
+    lb_policy random
+    transport http {
+    tls
+    tls_insecure_skip_verify
+    }
+    header_up Host {host}
+    }
+}
+
+https://pages.github.com:443 https://copilot.github.com:443 https://services.github.com:443 https://resources.github.com:443 https://developer.github.com:443 https://partner.github.com:443 https://desktop.github.com:443 https://guides.github.com:443 {
+tls /home/Chenr/.config/steamcommunity/steamcommunity.crt /home/Chenr/.config/steamcommunity/steamcommunity.key
+    import PNA_CORS
+    reverse_proxy https://ghps.steam302.xyz {
+    lb_policy random
+    transport http {
+    tls
+    tls_insecure_skip_verify
+    }
+    header_up Host {host}
+    }
+}
+
+https://support.github.com:443 https://education.github.com:443 https://enterprise.github.com:443 https://lab.github.com:443 https://classroom.github.com:443 https://central.github.com:443 {
+tls /home/Chenr/.config/steamcommunity/steamcommunity.crt /home/Chenr/.config/steamcommunity/steamcommunity.key
+
+    reverse_proxy https://gh140.steam302.xyz {
+    lb_policy random
+    transport http {
+    tls
+    tls_insecure_skip_verify
+    }
+    header_up Host {host}
+    }
+}
+
+https://desktop.githubusercontent.com:443 {
+tls /home/Chenr/.config/steamcommunity/steamcommunity.crt /home/Chenr/.config/steamcommunity/steamcommunity.key
+
+    reverse_proxy https://ghdesk.steam302.xyz {
+    lb_policy random
+    transport http {
+    tls
+    tls_insecure_skip_verify
+    }
+    header_up Host {host}
+    }
+}
+
