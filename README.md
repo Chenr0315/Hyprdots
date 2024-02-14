@@ -4,9 +4,9 @@ Hyprland Configure Files
 
 ## 显示安装的软件包
 
-<details>
-
 `paru -Qeq`
+
+<details>
 
 - aic94xx-firmware
 - alsa-firmware
