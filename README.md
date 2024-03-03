@@ -15,7 +15,7 @@ Hyprland Configure Files
 - android-sdk-platform-tools
 - archlinuxcn-keyring
 - archlinuxcn-mirrorlist-git
-- aria2
+- aria2-fast
 - base
 - base-devel
 - bluez
@@ -37,12 +37,12 @@ Hyprland Configure Files
 - firefox-developer-edition
 - fprintd
 - gamemode
-- glfw-wayland
+- glfw
 - gnome-themes-extra
-- gnu-netcat
 - gparted
 - grim
 - gvfs-mtp
+- gwenview
 - haveged
 - heroic-games-launcher-bin
 - hmcl
@@ -53,8 +53,11 @@ Hyprland Configure Files
 - jmtpfs
 - kdeconnect
 - kitty
+- lib32-libva-mesa-driver
 - lib32-mesa
+- lib32-mesa-vdpau
 - lib32-vulkan-radeon
+- libva-mesa-driver
 - light-git
 - linux
 - linux-firmware
@@ -63,6 +66,8 @@ Hyprland Configure Files
 - linux-zen-headers
 - material-icon-theme-git
 - mesa
+- mesa-utils
+- mesa-vdpau
 - mkinitcpio-firmware
 - nano
 - nemo
@@ -84,6 +89,7 @@ Hyprland Configure Files
 - python-pyclip
 - qt5-wayland
 - qt6-wayland
+- quickserve
 - radeon-profile-daemon-git
 - radeon-profile-git
 - rofi-lbonn-wayland-git
