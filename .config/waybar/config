@@ -75,7 +75,7 @@
   },
   "clock": {
     "interval": 1,
-    "format": "{:%Y年%m月%d日 %T %A}",
+    "format": "{:%T}",
     "tooltip": true,
     "tooltip-format": "<tt><small>{calendar}</small></tt>"
   },
