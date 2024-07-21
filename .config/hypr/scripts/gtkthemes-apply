@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-THEME='Tokyonight'
+THEME='Tokyonight-Dark'
 ICONS='Material-Palenight'
 FONT='Maple UI'
 # CUROSO_SIZE='24'

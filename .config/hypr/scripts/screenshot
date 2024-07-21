@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-DIR="$HOME/.config/rofi"
 Mesg="截图完成"
 
 option_1="桌面"
@@ -9,7 +8,7 @@ option_3="窗口"
 option_4="延时5s"
 option_5="延时10s"
 
-# Pass variables to rofi dmenu
+# Pass variables to wofi dmenu
 run_wofi() {
 	echo -e "$option_1\n$option_2\n$option_3\n$option_4\n$option_5" | wofi -d -p "截图"
 }
