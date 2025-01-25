@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+THEME='Tokyonight-Dark'
+ICONS='Material-Palenight'
+FONT='Maple UI'
+# CUROSO_SIZE='24'
+
+SCHEMA='gsettings set org.gnome.desktop.interface'
+
+apply_themes() {
+	${SCHEMA} gtk-theme "$THEME"
+	${SCHEMA} icon-theme "$ICONS"
+	${SCHEMA} font-name "$FONT"
+	# ${SCHEMA} cursor-size "$CUROSO_SIZE"
+}
+
+apply_themes
