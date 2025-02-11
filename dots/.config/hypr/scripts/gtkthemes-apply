@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 THEME='Tokyonight-Dark'
 ICONS='Material-Palenight'

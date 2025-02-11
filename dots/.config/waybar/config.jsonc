@@ -2,16 +2,15 @@
   "layer": "top",
   "position": "top",
   "margin": "3 3 0 3",
-  "modules-left": ["custom/power", "hyprland/workspaces", "cpu", "memory"],
-  "modules-center": ["clock"],
-  "modules-right": [
-    "pulseaudio",
-    "backlight",
-    "battery",
-    "network",
-    "gamemode",
-    "tray"
+  "modules-left": [
+    "custom/power",
+    "hyprland/workspaces",
+    "cpu",
+    "memory",
+    "gamemode"
   ],
+  "modules-center": ["clock"],
+  "modules-right": ["pulseaudio", "backlight", "battery", "network", "tray"],
 
   "custom/power": {
     "format": "",
@@ -22,14 +21,18 @@
     "format": "{name}{windows}",
     "on-scroll-up": "hyprctl dispatch workspace e+1",
     "on-scroll-down": "hyprctl dispatch workspace e-1",
+    "format-window-separator": "",
     "window-rewrite-default": " ",
     "window-rewrite": {
       "class<zen-browser>": " ",
-      "class<zen-browser> title<.*github.*>": " ",
       "class<nemo>": " ",
       "class<org.gnome.FileRoller>": " ",
       "class<kitty>": " ",
-      "class<code>": " "
+      "class<code>": " ",
+      "class<steam>": " 󰓓",
+      "class<steam> title<好友列表>": " ",
+      "class<vlc>": " 󰕼",
+      "class<eog>": " "
     }
   },
   "cpu": {
@@ -48,6 +51,11 @@
       "warning": 80,
       "critical": 90
     }
+  },
+  "gamemode": {
+    "format": "",
+    "format-alt": "",
+    "tooltip-format": "已启用游戏模式：{count}"
   },
 
   "clock": {
@@ -90,12 +98,7 @@
     "format-ethernet": "󰀂 {ifname}",
     "format-linked": "󰖪 {essid}",
     "format-wifi": "󰖩 {essid}",
-    "tooltip": false
-  },
-  "gamemode": {
-    "format": "",
-    "format-alt": "",
-    "tooltip-format": "已启用游戏模式：{count}"
+    "tooltip": true
   },
   "tray": {
     "icon-size": 16,

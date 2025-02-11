@@ -16,12 +16,12 @@ tooltip label,
 #workspaces,
 #cpu,
 #memory,
+#gamemode,
 #clock,
 #pulseaudio,
 #backlight,
 #network,
 #battery,
-#gamemode,
 #tray {
   color: #a9b1d6;
   font-size: 16px;
@@ -36,20 +36,20 @@ tooltip label,
 }
 
 #workspaces button {
-  background: #16161e;
+  background: #1a1b26;
   color: #a9b1d6;
   margin: 4px 3px 4px 3px;
-  transition: all 0.2s cubic-bezier(0, 0.55, 0.45, 1);
+  transition: all 0.3s cubic-bezier(0, 0.55, 0.45, 1);
 }
 #workspaces button.active {
   background: #7aa2f7;
-  color: #16161e;
+  color: #1a1b26;
   padding-left: 16px;
   padding-right: 16px;
 }
 #workspaces button:hover {
   background: #bb9af7;
-  color: #16161e;
+  color: #1a1b26;
 }
 
 #network.disconnected,
@@ -73,6 +73,6 @@ tooltip label,
 @keyframes blink_red {
   to {
     background-color: #f7768e;
-    color: #16161e;
+    color: #1a1b26;
   }
 }

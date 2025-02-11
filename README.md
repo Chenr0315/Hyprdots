@@ -16,7 +16,7 @@
 | hyprland                                                                         | 平铺式合成器   |
 | waybar                                                                           | 任务栏         |
 | kitty                                                                            | 终端模拟器     |
-| zsh                                                                              | 终端           |
+| fish                                                                             | 终端           |
 | starship                                                                         | 终端美化       |
 | zen-browser                                                                      | 浏览器         |
 | wofi                                                                             | 应用启动器     |
@@ -28,8 +28,7 @@
 | fastfetch                                                                        | 信息显示       |
 | btop                                                                             | 任务管理器     |
 | gamemode                                                                         | 游戏模式       |
-| grim                                                                             | 截屏           |
-| slurp                                                                            | 区域截屏       |
+| hyprshot                                                                         | 截屏           |
 | wlogout                                                                          | 注销菜单       |
 | ttf-maple-beta                                                                   | 字体           |
 | material-icon-theme-git                                                          | 图标主题       |

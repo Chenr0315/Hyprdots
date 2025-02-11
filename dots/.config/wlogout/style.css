@@ -1,34 +1,32 @@
-/** ********** Fonts ********** **/
+/* 字体 */
 * {
   font-family: "Maple UI";
   font-size: 14px;
   font-weight: bold;
 }
 
-/** ********** Main Window ********** **/
+/* 主窗口 */
 window {
-  background-color: #1e1e2e;
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
-/** ********** Buttons ********** **/
+/* 按钮 */
 button {
-  background-color: #242434;
-  color: #ffffff;
-  border: 2px solid #282838;
-  border-radius: 20px;
-  background-repeat: no-repeat;
-  background-position: center;
+  background-color: #1a1b26;
   background-size: 35%;
+  color: #a9b1d6;
+  margin: 2px;
 }
 
 button:focus,
-button:active,
+button:active {
+  background-color: #7aa2f7;
+}
 button:hover {
-  background-color: #89b4fa;
-  outline-style: none;
+  background-color: #bb9af7;
 }
 
-/** ********** Icons ********** **/
+/* 图标 */
 #lock {
   background-image: image(url("icons/lock.png"));
 }
