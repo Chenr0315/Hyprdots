@@ -30,6 +30,6 @@
 | gamemode                                                                         | 游戏模式       |
 | hyprshot                                                                         | 截屏           |
 | wlogout                                                                          | 注销菜单       |
-| ttf-maple-beta                                                                   | 字体           |
+| maplemono-nf-cn                                                                  | 字体           |
 | material-icon-theme-git                                                          | 图标主题       |
 | [Tokyonight-GTK-Theme](https://github.com/Fausto-Korpsvart/Tokyonight-GTK-Theme) | GTK 主题       |

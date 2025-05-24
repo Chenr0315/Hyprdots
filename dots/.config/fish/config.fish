@@ -10,3 +10,5 @@ if status is-interactive
 		starship init fish | source	
 	end
 end
+
+source /opt/miniconda3/etc/fish/conf.d/conda.fish

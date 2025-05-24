@@ -1,7 +1,7 @@
 {
     "label" : "lock",
-    "action" : "swaylock",
-    "text" : "锁屏",
+    "action" : "brightnessctl s 0",
+    "text" : "息屏",
     "keybind" : "l"
 }
 {

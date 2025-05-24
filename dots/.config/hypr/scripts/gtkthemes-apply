@@ -2,7 +2,7 @@
 
 THEME='Tokyonight-Dark'
 ICONS='Material-Palenight'
-FONT='Maple UI'
+FONT='Resource Han Rounded SC'
 # CUROSO_SIZE='24'
 
 SCHEMA='gsettings set org.gnome.desktop.interface'
